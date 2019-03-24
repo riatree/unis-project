@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cafeConditions">
+	<insert id="insert" parameterType="CafeCondition">
+		INSERT INTO cafe_conditions(NO,USER_NO,NAME,REGDATE)
+		VALUES(cafe_conditions_seq.nextval,#{userNo},#{name},systimestamp)
+	</insert>
+
+	<select id="selectConditions" parameterType="int" resultType="CafeCondition">
+		SELECT no, name
+		FROM cafe_conditions
+		WHERE user_no=#{_parameter}
+	</select>
+
+	<select id="selectList" resultType="CafeCondition" parameterType="int">
+		SELECT cd.no no, cd.name name
+		FROM users u, cafe_conditions cd, needs n
+		WHERE u.no = cd.user_no
+		AND n.user_no = u.no
+		AND n.no = #{no}
+	</select>
+</mapper>

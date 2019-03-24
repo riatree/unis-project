@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="images">
+
+	<insert id="insert" parameterType="Image">
+		<selectKey order="BEFORE" keyProperty="no" resultType="int">
+			SELECT images_seq.nextval
+			FROM dual
+		</selectKey>
+		INSERT INTO images(NO,USER_NO,OWNER_NO,NAME,REGDATE)
+		VALUES(#{no},#{userNo},#{ownerNo},#{name},systimestamp)
+	</insert>
+
+	<select id="selectList" parameterType="PageVO"
+		resultType="Image">
+		SELECT NO,USER_NO userNo,OWNER_NO ownerNo,NAME name,REGDATE,r
+		FROM(SELECT NO,USER_NO,OWNER_NO,NAME,REGDATE,rownum r
+		FROM(SELECT NO,USER_NO,OWNER_NO,NAME,REGDATE
+		FROM images
+		WHERE user_no=#{userNo}
+		ORDER BY regdate DESC))
+		WHERE r BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="selectAlbum" parameterType="ScrollVO" resultType="Image">
+		SELECT no,userNo,ownerNo,name,regdate
+		FROM (SELECT no,userNo,ownerNo,name,regdate,rownum r
+			  FROM (SELECT no,user_no userNo,owner_no ownerNo,name,regdate
+					FROM IMAGES
+					WHERE owner_no=#{ownerNo}
+					ORDER BY regdate DESC))
+		WHERE r BETWEEN #{start} AND #{end}
+	</select>
+	
+
+	<select id="selectListUnesImage" resultType="Image"
+		parameterType="int">
+		SELECT no, name,userNo, ownerNo,  r
+		FROM(SELECT no, name,userNo, ownerNo, rowNum r
+			FROM(SELECT i.no no, i.name name, i.user_no userNo, i.owner_no ownerNo
+				FROM users u, images i, images_link il, needs n
+				WHERE u.no = n.user_no
+				AND i.no = il.image_no
+				AND il.target_no = n.no
+				AND n.no = #{no}
+				ORDER BY no DESC))
+		WHERE r between 1 AND 3
+
+	</select>
+	
+</mapper>

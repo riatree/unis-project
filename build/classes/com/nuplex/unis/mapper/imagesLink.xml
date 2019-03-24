@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="imagesLink">
+<insert id="insert" parameterType="ImageLink">
+INSERT INTO images_link(NO,IMAGE_NO,TARGET_TYPE,TARGET_NO,REGDATE)
+VALUES(images_link_seq.nextval,#{imageNo},#{targetType},#{targetNo},systimestamp)
+</insert>
+
+<select id="selectIHAS" parameterType="int" resultType="Image">
+SELECT l.no, i.name
+FROM images i, images_link l
+WHERE i.no = l.image_no
+AND l.target_type='IHAS' AND l.target_no=#{_parameter}
+</select>
+</mapper>

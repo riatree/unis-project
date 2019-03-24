@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="matchings">
+<select id="selectListByUnes" resultType="Matching" parameterType="int">
+SELECT m.no no, u.nickname nickname,u.profile profile, u.no userNo, m.start_event startEvent, m.end_event endEvent, m.intro intro, m.status status, n.no needNo
+FROM users u, needs n, matchings m
+WHERE m.user_no = u.no
+AND m.need_no = n.no
+AND n.type = 'unes'
+AND m.status = '매칭완료'
+AND n.no = #{no}
+</select>
+
+
+<!--팝업창에서 신청 클릭시 -->
+<insert id="insert" parameterType="Matching">
+		INSERT INTO matchings(NO,NEED_NO,USER_NO,START_EVENT,END_EVENT,INTRO,STATUS,REGDATE)
+		VALUES(matchings_seq.nextval,#{needNo},#{userNo},#{startEvent},#{endEvent},#{intro},'진행중',systimestamp)
+	</insert>
+
+<!--unes 매칭리스트 -->
+<select id="selectUnesMacingList" parameterType="PageVO" resultType="Matching">
+SELECT no, startEvent, endEvent, intro,status, noUser, nickname, profile,noNeed, title,  r 
+FROM(SELECT no, startEvent, endEvent, intro,status, noUser, nickname, profile,noNeed, title, rowNum r 
+	FROM(SELECT m.no no, m.start_event startEvent, m.end_event endEvent, m.intro,m.status,
+			u.no noUser, u.nickname nickname, u.profile profile,
+			n.no noNeed, n.title title 
+		FROM matchings m, users u,needs n
+		WHERE m.user_no = u.no
+		AND m.need_no = n.no
+		AND m.status = '진행중'
+		AND n.no = #{userNo}))
+WHERE r BETWEEN #{start} AND #{end}
+ORDER BY r ASC
+</select>
+
+
+<select id="selectUnesMacingTotal" parameterType="int" resultType="int">
+SELECT count(*)
+FROM matchings m, users u,needs n
+WHERE m.user_no = u.no
+AND m.need_no = n.no
+AND m.status = '진행중'
+AND n.no = #{no}
+</select>
+
+<update id="matchingUpdate" parameterType="int">
+UPDATE matchings
+SET status = '매칭완료'
+WHERE no = #{no}
+</update>
+
+<update id="unMatchingUpdate" parameterType="int">
+UPDATE matchings
+SET status = '거절됨'
+WHERE no = #{no}
+</update>
+
+<select id="selectUserMacingList" parameterType="PageVO" resultType="Matching">
+SELECT no, startEvent, endEvent, intro,status, noUser, userNickname, userProfile,noNeed, needTitle,  r 
+FROM(SELECT no, startEvent, endEvent, intro,status, noUser, userNickname, userProfile,noNeed, needTitle, rowNum r 
+	FROM(SELECT m.no no, m.start_event startEvent, m.end_event endEvent, m.intro,m.status,
+			u.no noUser, u.nickname userNickname, u.profile userProfile,
+			n.no noNeed, n.title needTitle 
+		FROM matchings m, users u,needs n
+		WHERE m.user_no = u.no
+		AND m.need_no = n.no
+		AND m.status = '진행중'
+		AND m.user_no = #{userNo}))
+WHERE r BETWEEN #{start} AND #{end}
+ORDER BY r ASC
+</select>
+
+<select id="selectUserMacingTotal" parameterType="int" resultType="int">
+SELECT count(*)
+FROM matchings
+WHERE  user_no = #{no}
+</select>	
+</mapper>

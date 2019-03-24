@@ -1,0 +1,380 @@
+body{
+    height: 100%;
+}
+#content .aux{
+	padding-top: 20px;
+}
+h2{
+    font-size: 40px;
+    text-align: center;
+}
+form{
+    width: 450px;
+    margin: auto;
+}
+.wrapper{
+    margin: 20px 0;
+}
+.input_title{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+label{
+    cursor: pointer;
+}
+
+#titleWrap input, #regionWrap input, #openkakaoWrap input, #costBox input{
+    width: 448px;
+    height: 26px;
+    border: 1px solid #fa7268;
+    border-radius: 5px;
+    text-indent: 10px;
+}
+
+#regionWrap input{
+    width: 398px;
+    border-radius: 5px 0 0 5px;
+}
+#searchRegionBtn{
+    width: 50px;
+    width: 48px;!ie;
+    height: 30px;
+    padding: 0;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    background-color: #fa7268;
+    color: #fff;
+    vertical-align: top;
+}
+
+#talentWrap, #openkakaoWrap{
+    position: relative;
+}
+.icon_talent{
+    width: 35px;
+    height: 48px;
+    padding: 2px;
+    margin-left: 5px;
+    border: 3px solid #A9A9A9;
+    border-radius: 5px;
+    display: inline-block;
+    color: #616161;
+    text-align: center;
+    vertical-align: bottom;
+}
+.icon_talent.on{
+    border-color: #fa7268;
+    font-weight: bold;
+    color: #fa7268;
+}
+.icon_talent .fas{
+    font-size: 30px;
+    display: block;
+}
+#inputBox, #openkakaoWrap h3{
+    display: inline-block;
+}
+#inputBox{
+    display: none;
+}
+#inputBox input{
+    width: 148px;
+    height: 26px;
+    border: 1px solid #A9A9A9;
+    border-radius: 5px;
+    text-indent: 10px;
+}
+#inputBox span, #openkakaoWrap span{
+    cursor: pointer;
+}
+.help{
+    padding: 5px;
+    display: inline-block;
+    position: absolute;
+    background-color: #A9A9A9;
+    border-radius: 5px;
+    text-align: justify;
+    line-height: 1.2;
+    color: #fff;
+    display: none;
+}
+.help:after{
+    content: '';
+    width: 0;
+    height: 0;
+    border-right: 10px solid #A9A9A9;
+    border-top: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+}
+#addTalentHelp{
+    width: 210px;
+    top: 40px;
+    right: -240px;
+}
+#addTalentHelp:after{
+    top: 20px;
+    left: -20px;
+}
+
+#dateBox{
+    position: relative;
+    margin-bottom: 10px;
+    z-index: 1;
+}
+.tui-calendar th, .tui-calendar td{
+    line-height: 39px;
+}
+.timepicker{
+    width: 172px;
+    display: inline-block;
+}
+.tui-timepicker{
+    padding: 0;
+    /*border: none;*/
+}
+.wave{
+    font-size: 20px;
+}
+
+#noiseWrap label{
+    display: block;
+    margin: 10px 0;
+}
+
+#costWrap label{
+    width: 190px;
+    height: 25px;
+    display: inline-block;
+    border-radius: 5px;
+    background-color: #A9A9A9;
+    text-align: center;
+    font-size: 17px;
+    color: #fff;
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+#costBox{
+    width: 450px;
+    margin: 10px auto;
+    display: inline-block;
+}
+#costBox input{
+    width: 398px;
+}
+#costBox span{
+    width: 40px;
+    width: 38px;!ie;
+    display: inline-block;
+    text-align: right;
+}
+#costWrap .standard.on, #costWrap .method.on{
+    background-color: #fa7268;
+}
+
+#scaleWrap{
+    margin-top: 45px;
+    clear: both;
+}
+.ui-slider-handle{
+    border-radius: 20px;
+    outline: none;
+}
+.range_last{
+    float: right;
+}
+.range_input{
+    width: 30px;
+    margin-left: 150px;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    background: transparent;
+}
+
+#openkakaoHelp{
+    width: 300px;
+    top: -15px;
+    right: -30px;
+}
+#openkakaoHelp:after{
+    top: 15px;
+    left: -20px;
+}
+
+#imageWrap{
+    overflow: hidden;
+}
+#addImageBtn{
+    width: 100px;
+    height: 80px;
+    float: left;
+    border: 2px solid #fa7268;
+    border-radius: 5px;
+    background-image: url("../img/camera.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    margin-right: 10px;
+}
+#addImageBtn:hover{
+    background-color: #fa7268;
+}
+#addImageBtn.on{
+	background-color: #aaa;
+	border-color: #aaa;
+	cursor: default;
+}
+.blank{
+    width: 101px;
+    height: 76px;
+    float: left;
+    margin-right: 12px;
+    border: 2px dotted #fa7268;
+}
+.blank:last-child{
+    margin-right: 0;
+}
+
+#buttonWrap{
+    clear: both;
+    width: 450px;
+    height: 30px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+#buttonWrap button{
+    width: 200px;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    background-color: #68d3fa;
+    font-size: 20px;
+    color: #fff;
+}
+#buttonWrap button:hover{
+    background-color: #fff;
+    color: #424242;
+}
+
+#popupBackground{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    background: rgba(0,0,0,.7);
+    display: none;
+}
+
+#chooseMethodPopup{
+    position: fixed;
+    width: 380px;
+    height: 180px;
+    padding: 10px;
+    left: 50%;
+    top: 50%;
+    margin: -100px 0 0 -200px;
+    z-index: 2;
+    background-color: #fff;
+    display: none;
+}
+.btn_close, .btn_choose{
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+    float: right;
+    line-height: 30px;
+    margin: 5px;
+}
+.btn_upload{
+    clear: both;
+    width: 300px;
+    height: 40px;
+    margin: 20px auto;
+    display: block;
+    background-color: #fa7268;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    font-weight: normal;
+    border-radius: 5px;
+}
+.btn_upload:hover{
+    color: #000;
+    background-color: #fff;
+}
+
+#chooseImagePopup {
+    position: fixed;
+    width: 750px;
+    height: 500px;
+    /*padding: 10px;*/
+    left: 50%;
+    top: 50%;
+    margin: -250px 0 0 -375px;
+    z-index: 2;
+    background-color: #fff;
+    overflow: auto;
+    display: none;
+    text-align: justify;
+}
+#chooseImagePopup ul {
+    overflow: hidden;
+    margin-top: 50px;
+    padding-left: 5px;
+}
+#btnSelectBox{
+    width: 730px;
+    height: 50px;
+    overflow: hidden;
+    position: fixed;
+    background: #fff;
+    text-align: center;
+    z-index: 2;
+}
+.item{
+	width: 235px;
+    height: 135px;
+    float: left;
+    margin: 5px 10px 5px 0;
+    position: relative;
+    font-size: 25px;
+}
+.item img{
+    width: 235px;
+    height: 135px;
+}
+.item:nth-child(3n) {
+    margin-right:0;
+}
+.item .far{
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.item i{
+    margin: 5px;
+}
+
+.added_image{
+    width: 105px;
+    height: 81px;
+    float: left;
+    margin-right: 12px;
+}
+.added_image:last-child{
+    margin-right: 0;
+}

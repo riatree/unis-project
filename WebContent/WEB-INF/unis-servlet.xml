@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+
+	<!-- 어노테이션으로(반드시) -->
+	<mvc:annotation-driven/>
+	
+	<!-- /WEB-INF/view/ .jsp -->
+	<mvc:view-resolvers>
+		<mvc:jsp prefix="/WEB-INF/view/" suffix=".jsp"/>
+	</mvc:view-resolvers>
+	
+	<!-- /는 모든 요청이 DispatcherServlet으로 들어가기 때문에 resource를 설정해야한다.  -->
+	<mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
+	<mvc:resources location="/img/" mapping="/img/**"></mvc:resources>
+	<mvc:resources location="/upload/" mapping="/upload/**"></mvc:resources>
+	<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
+	<mvc:resources location="/fonts/" mapping="/fonts/**"></mvc:resources>
+
+	
+	<!-- MultipartResolver -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" p:defaultEncoding="UTF-8" p:maxUploadSize="104857600" />
+		
+	<!-- controller 설정 -->
+	<bean p:needsService-ref="needsService" class="com.nuplex.unis.controller.NeedsController"/>
+	<bean p:needsService-ref="needsService" p:usersSerivce-ref="usersService" p:resizeImageUtil-ref="resizeImageUtil" p:commentsService-ref="commentsService" class="com.nuplex.unis.controller.AjaxController"/>
+	<bean p:usersService-ref="usersService" class="com.nuplex.unis.controller.UsersController"/>
+	<bean p:usersService-ref="usersService" class="com.nuplex.unis.controller.IndexController"/>
+</beans>

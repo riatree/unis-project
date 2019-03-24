@@ -1,0 +1,304 @@
+@charset "UTF-8";
+
+body {
+	overflow: hidden;
+}
+
+
+button {
+	outline: none;
+	border: none;
+}
+
+/*contents 영억*/
+#heroWrap {
+	width: 100%;
+	height: 400px;
+	overflow: hidden;
+}
+
+#heroList {
+	width: 300vw;
+	height: 400px;
+	transition: .3s ease;
+}
+
+#heroList .hero {
+	width: 33.3%;
+	height: 400px;
+	float: left;
+}
+
+.hero #IHAS {
+	width: 100%;
+	height: 400px;
+	background-image: url(../img/11/ihas_in_index.jpg);
+	background-size: 100% 130%;
+	background-repeat: no-repeat;
+	box-shadow: 0 0 150px inset #424242;
+	transition: .5ms ease;
+}
+
+.hero #UNES {
+	width: 100%;
+	height: 400px;
+	background-image: url(../img/11/unes_in_index.jpg);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	box-shadow: 0 0 150px inset #424242;
+}
+
+.hero #INES {
+	width: 100%;
+	height: 400px;
+	background-image: url(../img/11/artist_in_index.jpg);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	box-shadow: 0 0 150px inset #424242;
+}
+
+.hero .hero_detail {
+	width: 60vw;
+	height: auto;
+	margin: auto;
+	transform: translateY(100px);
+	font-size: 6vw;
+	color: #eee;
+	text-align: center;
+	text-shadow: 1px 1px 10px #424242, 2px 2px 5px #424242;
+}
+
+#cafeWrap {
+	width: 100%;
+	height: auto;
+	margin: auto;
+}
+
+#cafeWrap .title {
+	width: 74%;
+	height: 80px;
+	margin: auto;
+	padding-top: 20px;
+	text-align: center;
+	font-size: 2.5vw;
+	color: #6495ed;
+	text-shadow: 1px 1px 2px #757575;
+}
+
+#cafeList {
+	width: 100%;
+	height: 100%;
+	margin: 20px auto;
+	overflow: hidden;
+}
+
+#cafeList>li.cafe { 
+	width: 340px;
+	height: 250px;
+	border-radius: 2px;
+	float: left;
+	margin: 8px 5px;
+	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, .1);
+	position: relative;
+}
+
+#cafeList>li.cafe:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, .14);
+}
+
+.cafe .cafe_img {
+	overflow: hidden;
+}
+
+#cafeList div.cafe_img>img {
+	width: 340px;
+	height: 250px;
+	border-radius: 2px;
+	transition: .3s ease;
+}
+
+#cafeList div.cafe_title {
+	width: 335px;
+	height: 42px;
+	background: rgba(0, 0, 0, 0.4);
+	position: absolute;
+	top: 205px;
+	left: 0px;
+	line-height: 19px;
+	border-radius: 2px;
+	padding: 4px 0 0 5px;
+}
+
+#cafeList div.cafe_detail {
+	width: 340px;
+	height: 205px;
+	background: rgba(0, 0, 0, 0.4);
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	border-radius: 2px;
+	transition: all .3s ease;
+	display: none;
+}
+
+.cafe_detail>strong {
+	color: #fafafa;
+	font-size: 16px;
+	padding: 10px;
+}
+
+.cafe_title>strong {
+	color: #fafafa;
+	font-size: 16px;
+	padding-top: 10px;
+}
+
+.cafe_title>.tema {
+	font-size: 17px;
+	font-weight: bold;
+	padding-left: 5px;
+	color: #fa7268;
+}
+
+.cafe_title em {
+	color: #cdcdcd;
+	font-size: 14px;
+}
+
+.cafe_name {
+	color: #cdcdcd;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 23px;
+	width: 270px;
+	height: 140px;
+	margin: 30px auto;
+	word-break: break-all;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+#footHero {
+	clear: both;
+	width: 100%;
+	height: 400px;
+}
+
+#footHeroList {
+	width: 100%;
+	height: 400px;
+}
+
+#footHeroList .hero {
+	width: 50%;
+	height: 400px;
+	background-color: #818181;
+	float: left;
+}
+
+.hero #cafeIntro {
+	width: 100%;
+	height: 400px;
+	background-image: url(../img/11/unes_in_index.jpg);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+#footHeroList .hero .title {
+	width: 95%;
+	height: 50px;
+	color: #fff;
+	text-shadow: 1px 2px 5px #424242;
+	font-size: 3vw;
+	padding-top: 20px;
+}
+
+#footHeroList .hero .detail {
+	width: 54%;
+	height: 20%;
+	font-size: 2vw;
+	color: #fff;
+	margin: auto;
+	transform: translateY(200px);
+}
+
+#footHeroList .hero .detail>em {
+	color: #FA7268;
+	font-weight: bold;
+}
+
+#cafeIntro .title {
+	text-align: right;
+}
+
+#cafeIntro .title::after {
+	content: '';
+	clear: both;
+}
+
+#artistIntro .title {
+	text-indent: 20px;
+}
+
+.hero #artistIntro {
+	width: 100%;
+	height: 400px;
+	background-image: url(../img/11/artist_in_index.jpg);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 1080px) {
+	#content .aux {
+		width: 90%;
+		margin: auto;
+	}
+
+	#cafeList {
+		width: 85%;
+	}
+
+	#cafeList>li.cafe {
+		margin: 15px 2%;
+		overflow: hidden;
+	}
+	#cafeList>li.cafe:nth-child(2n){
+        margin-right: 0;
+    }
+}
+
+@media screen and (max-width: 962px) {
+	#cafeList>li.cafe:nth-child(1n) {
+		margin: 15px 22%;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	#cafeList>li.cafe:nth-child(1n) {
+		margin: 15px 10%;
+	}
+}
+
+@media screen and (max-width: 525px) {
+	#cafeList {
+		width: 90%;
+	}
+	#cafeList>li.cafe:nth-child(1n) {
+		margin: 15px auto;
+	}
+}
+
+@media screen and (max-width: 470px) {
+	#heroWrap, #heroList .hero, .hero #IHAS, .hero #UNES, .hero #INES,
+		#footHero, #footHeroList, #footHero .hero, .hero #cafeIntro, .hero #artistIntro
+		{
+		height: 200px;
+	}
+	#cafeWrap, #cafeList {
+		width: 100%;
+	}
+	#footHeroList .hero .detail {
+		transform: translateY(0);
+	}
+}

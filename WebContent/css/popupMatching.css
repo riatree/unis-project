@@ -1,0 +1,146 @@
+@charset "UTF-8";
+
+/* 신청하기 팝업 */
+#popupMatchingWrap{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    margin-top: 50px;
+    z-index: 2;
+    visibility: hidden;
+}
+#popupMatching{
+    width: 600px;
+    margin: auto;
+    border: 1px solid black;
+    background-color: white;
+    overflow: auto;
+}
+#popupMatching h3{
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    margin: 20px;
+}
+input{
+    margin: .4rem auto;
+}
+#calendar {
+    max-width: 400px;
+    margin: auto;
+}
+	#popDateBox{
+			width : 420px;
+			height: 40px;
+		    position: relative;
+		    margin: 10px auto;
+		    z-index: 1;
+		    text-align: center;
+		}
+		.wave{
+   			 font-size: 20px;
+   		/* 	 background-color: blue; */
+   			 vertical-align: bottom;
+		}
+		.wave2{
+   			 font-size: 20px;
+   		/* 	 background-color: blue; */
+   			 vertical-align: top;
+		}
+		.tui-calendar th, .tui-calendar td{
+		    line-height: 39px;
+		}
+		#timeBox{
+			width : 420px;
+			height: 30px;
+		    position: relative;
+		    margin: 10px auto;
+		    z-index: 1;
+		}
+		.timepicker{
+		    width: 200px;
+		    display: inline-block;
+		    vertical-align: bottom;
+		}
+		.tui-timepicker{
+		    padding: 0;
+		    /*border: none;*/
+		}
+#matchingTextarea{
+    width: 550px;
+    font-size: 15px;
+}
+.input_time fieldset {
+    margin: auto;
+}
+.input_time_btn{
+    margin-top: 20px;
+    float: right;
+}
+.input_time_btn button{
+    width: 80px;
+    height: 40px;
+    border-radius: 20px 20px;
+    outline: 0;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border: 1px solid #424242;
+}
+.input_time_btn button:hover{
+    background-color: #fa7268;
+    color: #fff;
+}
+
+h4{
+    margin-left: 15px;
+    font-size: 20px;
+    height: 40px;
+    line-height: 30px;
+}
+#calendar a{
+    font-size: 12px;
+}
+/*켈린더 팝업*/
+#popup{
+    background-color: rgba(0,0,0,.8);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    display: none;
+}
+#popupCalendarDetailBox{
+    width: 250px;
+    height: 280px;
+    border: 1px solid #424242;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -125px;
+    margin-top: -100px;
+    background-color: #fff;
+    z-index: 4;
+}
+#popupCalendarDetailCloseBtn{
+    float: right;
+    cursor: pointer;
+    margin: 5px 5px 0 0;
+}
+#popupCalendarProfile>img{
+    border-radius: 60px;
+    display: block;
+    margin: 20px auto;
+}
+.popup_calendar_date{
+    text-align: center;
+    margin: 10px auto;
+}
+.fc-content{
+    cursor: pointer;
+}
+
+

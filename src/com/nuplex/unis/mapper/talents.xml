@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="talents">
+
+	<select id="selectTalents" parameterType="int" resultType="Talent">
+		SELECT ut.no, name
+		FROM user_talents ut, talents t
+		WHERE user_no=#{_parameter}
+		AND ut.talent_no = t.no
+	</select>
+	
+	
+</mapper>

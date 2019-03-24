@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/oracle" />
+	
+	<!-- 트랜잭션 관련 설정 -->
+	<tx:annotation-driven/>
+
+	<bean id="transactionManager" p:dataSource-ref="dataSource"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager" />
+
+	<!-- SqlSessionFactory 설정 -->
+	<bean id="sqlSessionFactory" p:dataSource-ref="dataSource" p:configLocation="/WEB-INF/mybatis-config.xml" class="org.mybatis.spring.SqlSessionFactoryBean"/>
+	
+	<!-- sqlSession 설정 -->
+	<bean id="sqlSession" c:sqlSessionFactory-ref="sqlSessionFactory" class="org.mybatis.spring.SqlSessionTemplate"/>
+	
+	<!-- Util 설정 -->
+	<bean id="resizeImageUtil" class="com.nuplex.unis.util.ResizeImageUtil"/>
+	<bean id="fileRenameUtil" class="com.nuplex.unis.util.FileRenameUtil"/>
+	<bean id="paginateUtil" class="com.nuplex.unis.util.PaginateUtil"/>
+	
+	<!-- DAO 설정 -->
+	<bean id="cafeConditionsDAO" p:sqlSession-ref="sqlSession" class="com.nuplex.unis.dao.CafeConditionsDAOImpl"/>
+	<bean id="commentsDAO" p:sqlSession-ref="sqlSession" class="com.nuplex.unis.dao.CommentsDAOImpl"/>
+	<bean id="followsDAO" p:sqlSession-ref="sqlSession" class="com.nuplex.unis.dao.FollowsDAOImpl"/>
+	<bean id="imagesDAO" p:sqlSession-ref="sqlSession" class="com.nuplex.unis.dao.ImagesDAOImpl"/>
+	<bean id="imagesLinkDAO" p:sqlSession-ref="sqlSession" class="com.nuplex.unis.dao.ImagesLinkDAOImpl"/>
+	<bean id="likesDAO" p:sqlSession-ref="sqlSession" class="com.nuplex.unis.dao.LikesDAOImpl"/>
+	<bean id="matchingsDAO" p:sqlSession-ref="sqlSession" class="com.nuplex.unis.dao.MatchingsDAOImpl"/>
+	<bean id="messagesDAO" p:sqlSession-ref="sqlSession" class="com.nuplex.unis.dao.MessagesDAOImpl"/>
+	<bean id="needsDAO" p:sqlSession-ref="sqlSession" class="com.nuplex.unis.dao.NeedsDAOImpl"/>
+	<bean id="supportsDAO" p:sqlSession-ref="sqlSession" class="com.nuplex.unis.dao.SupportsDAOImpl"/>
+	<bean id="talentsDAO" p:sqlSession-ref="sqlSession" class="com.nuplex.unis.dao.TalentsDAOImpl"/>
+	<bean id="unregUsersDAO" p:sqlSession-ref="sqlSession" class="com.nuplex.unis.dao.UnregUsersDAOImpl"/>
+	<bean id="usersDAO" p:sqlSession-ref="sqlSession" class="com.nuplex.unis.dao.UsersDAOImpl"/>
+	<bean id="userTanlentsDAO" p:sqlSession-ref="sqlSession" class="com.nuplex.unis.dao.UserTanlentsDAOImpl"/>
+	
+	<!-- Service 설정 -->
+	<bean id="cafeConditionsService" p:cafeConditionsDAO-ref="cafeConditionsDAO" class="com.nuplex.unis.service.CafeConditionsServiceImpl"/>
+	<bean id="commentsService" p:commentsDAO-ref="commentsDAO" class="com.nuplex.unis.service.CommentsServiceImpl"/>
+	<bean id="followsService" p:followsDAO-ref="followsDAO" class="com.nuplex.unis.service.FollowsServiceImpl"/>
+	<bean id="imagesService" p:imagesDAO-ref="imagesDAO" class="com.nuplex.unis.service.ImagesServiceImpl"/>
+	<bean id="imagesLinkService" p:imagesLinkDAO-ref="imagesLinkDAO" class="com.nuplex.unis.service.ImagesLinkServiceImpl"/>
+	<bean id="likesService" p:likesDAO-ref="likesDAO" class="com.nuplex.unis.service.LikesServiceImpl"/>
+	<bean id="matchingsService" p:matchingsDAO-ref="matchingsDAO" class="com.nuplex.unis.service.MatchingsServiceImpl"/>
+	<bean id="messagesService" p:messagesDAO-ref="messagesDAO" class="com.nuplex.unis.service.MessagesServiceImpl"/>
+	<bean id="needsService" p:paginateUtil-ref="paginateUtil" p:needsDAO-ref="needsDAO" p:imagesDAO-ref="imagesDAO" p:imagesLinkDAO-ref="imagesLinkDAO" p:cafeConditionsDAO-ref="cafeConditionsDAO" p:matchingsDAO-ref="matchingsDAO" class="com.nuplex.unis.service.NeedsServiceImpl"/>
+	<bean id="supportsService" p:supportsDAO-ref="supportsDAO" class="com.nuplex.unis.service.SupportsServiceImpl"/>
+	<bean id="talentsService" p:talentsDAO-ref="talentsDAO" class="com.nuplex.unis.service.TalentsServiceImpl"/>
+	<bean id="unregUsersService" p:unregUsersDAO-ref="unregUsersDAO" class="com.nuplex.unis.service.UnregUsersServiceImpl"/>
+	<bean id="usersService" p:usersDAO-ref="usersDAO" p:cafeConditionsDAO-ref="cafeConditionsDAO"
+	p:commentsDAO-ref="commentsDAO" p:imagesLinkDAO-ref="imagesLinkDAO" p:matchingsDAO-ref="matchingsDAO"
+	p:followsDAO-ref="followsDAO" p:imagesDAO-ref="imagesDAO" p:talentsDAO-ref="talentsDAO"
+	class="com.nuplex.unis.service.UsersServiceImpl"/>
+	<bean id="userTalentsService" p:userTanlentsDAO-ref="userTanlentsDAO" class="com.nuplex.unis.service.UserTalentsServiceImpl"/>
+</beans>

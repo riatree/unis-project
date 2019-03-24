@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="users">
+	<select id="selectLogin" resultType="User" parameterType="User">
+		SELECT NO,EMAIL,PASSWORD,NAME,NICKNAME,BIRTH_DATE
+		birthDate,GENDER,CELL,PROFILE,COVER,REGDATE,INTRO,LICENSE,CAFE_NAME
+		cafeName,ZIPCODE,ADDRESS_NEW addressNew,ADDRESS_OLD
+		addressOld,LATITUDE,LONGITUDE,OPEN,CLOSE,REST_DATE
+		restDate,PHONE,AMERICANO,LAST_LOGIN
+		FROM users
+		WHERE email=#{email} AND password=#{password}
+	</select>
+
+	<select id="selectCheckId" resultType="int"
+		parameterType="String">
+		SELECT COUNT(*)
+		FROM users
+		WHERE email = #{email}
+	</select>
+
+	<select id="selectCheckNickname" resultType="int"
+		parameterType="String">
+		SELECT COUNT(*)
+		FROM users
+		WHERE nickname = #{nickname}
+	</select>
+
+	<select id="selectCheckLicense" resultType="int"
+		parameterType="String">
+		SELECT COUNT(*)
+		FROM users
+		WHERE license = #{license}
+	</select>
+
+	<insert id="insert" parameterType="User">
+		<selectKey order="BEFORE" keyProperty="no" resultType="int">
+			SELECT users_seq.nextval
+			FROM dual
+		</selectKey>
+		INSERT INTO users(no, email, password, name, nickname, birth_date,
+		gender, cell, profile, cover, regdate, intro, license, cafe_name,
+		zipcode, address_new, address_old, latitude, longitude, open, close,
+		rest_date, phone, americano,last_login)
+		VALUES (#{no}, #{email}, #{password}, #{name}, #{nickname}, '1997-02-25',
+		'F', #{cell}, #{profile}, 'default.png', systimestamp,
+		#{intro}, #{license}, #{cafeName}, #{zipcode}, #{addressNew}, #{addressOld},
+		#{latitude}, #{longitude}, #{open}, #{close}, #{restDate},
+		#{phone}, #{americano} , systimestamp)
+	</insert>
+
+	<select id="selectUserType" resultType="String"
+		parameterType="int">
+		SELECT case when license IS NOT NULL then 'cafe' ELSE
+		'user' END
+		FROM users
+		WHERE no=#{_parameter}
+	</select>
+
+	<select id="selectCafe" resultType="User" parameterType="int">
+		SELECT
+		no,nickname,profile,cover,intro,cafe_name cafeName,address_new
+		addressNew,address_old addressOld,
+		latitude,longitude,open,close,rest_date restDate,phone
+		FROM users
+		WHERE no=#{_parameter}
+	</select>
+
+	<select id="selectUser" resultType="User" parameterType="int">
+		SELECT no,nickname,profile,cover,intro
+		FROM users
+		WHERE no = #{_parameter}
+	</select>
+
+	<select id="selectCount" resultType="int" parameterType="int">
+		SELECT count(*)
+		FROM comments
+		WHERE target_no = #{_parameter}
+	</select>
+
+	<select id="selectTotal" parameterType="PageVO" resultType="int">
+		SELECT count(*)
+		FROM (select
+		u.no,u.nickname,u.cafeName,u.nickname,u.addressOld,u.intro,u.profile,u.americano,
+		ru.withUnis
+		FROM(SELECT
+		NO,EMAIL,PASSWORD,NAME,NICKNAME,BIRTH_DATE,GENDER,CELL,PROFILE,COVER,REGDATE,INTRO,LICENSE,CAFE_NAME
+		cafeName,ZIPCODE,ADDRESS_NEW,ADDRESS_OLD
+		addressOld,LATITUDE,LONGITUDE,OPEN,CLOSE,REST_DATE,PHONE,AMERICANO,LAST_LOGIN,rownum
+		r
+		FROM(SELECT
+		NO,EMAIL,PASSWORD,NAME,NICKNAME,BIRTH_DATE,GENDER,CELL,PROFILE,COVER,REGDATE,INTRO,LICENSE,CAFE_NAME,ZIPCODE,ADDRESS_NEW,ADDRESS_OLD,LATITUDE,LONGITUDE,OPEN,CLOSE,REST_DATE,PHONE,AMERICANO,LAST_LOGIN
+		FROM users u
+		WHERE license IS NOT NULL
+		ORDER BY regdate DESC)) u, (SELECT u.no no, NVL(withUnis,0) withUnis
+		FROM users u, (SELECT DISTINCT n.user_no withUnis
+		FROM (SELECT need_no
+		FROM matchings
+		WHERE status = '매칭완료' AND (TO_CHAR(end_event,'yyyymmdd') -
+		TO_CHAR(SYSDATE,'yyyymmdd')) > 0) m, needs n
+		WHERE n.no = m.need_no
+		AND n.type = 'unes') m
+		WHERE u.no = m.withUnis(+)
+		<if test="addressOld!=''">
+			AND u.address_old LIKE '%${addressOld}%'
+		</if>
+		<if test="americano!=0">
+											<![CDATA[AND u.americano <= #{americano}]]>
+		</if>
+		) ru
+		WHERE u.no = ru.no
+		<if test="withUnis!=0">
+			AND withUnis = #{withUnis}
+		</if>
+		)
+	</select>
+
+	<select id="selectList" resultType="User" parameterType="PageVO">
+		select
+		no,nickname,cafeName,nickname,addressOld,intro,profile,americano,
+		withUnis
+		from(select
+		u.no,u.nickname,u.cafeName,u.addressOld,u.intro,u.profile,u.americano,
+		ru.withUnis, rownum r
+		from(SELECT
+		NO,EMAIL,PASSWORD,NAME,NICKNAME,BIRTH_DATE,GENDER,CELL,PROFILE,COVER,REGDATE,INTRO,LICENSE,CAFE_NAME
+		cafeName,ZIPCODE,ADDRESS_NEW,ADDRESS_OLD
+		addressOld,LATITUDE,LONGITUDE,OPEN,CLOSE,REST_DATE,PHONE,AMERICANO,LAST_LOGIN,rownum
+		r
+		FROM(SELECT
+		NO,EMAIL,PASSWORD,NAME,NICKNAME,BIRTH_DATE,GENDER,CELL,PROFILE,COVER,REGDATE,INTRO,LICENSE,CAFE_NAME,ZIPCODE,ADDRESS_NEW,ADDRESS_OLD,LATITUDE,LONGITUDE,OPEN,CLOSE,REST_DATE,PHONE,AMERICANO,LAST_LOGIN
+		FROM users u
+		WHERE license IS NOT NULL
+		ORDER BY regdate DESC)) u, (SELECT u.no no, NVL(withUnis,0) withUnis
+		FROM users u, (SELECT DISTINCT n.user_no withUnis
+		FROM (SELECT need_no
+		FROM matchings
+		WHERE status = '매칭완료' AND (TO_CHAR(end_event,'yyyymmdd') -
+		TO_CHAR(SYSDATE,'yyyymmdd')) > 0) m, needs n
+		WHERE n.no = m.need_no
+		AND n.type = 'unes') m
+		WHERE u.no = m.withUnis(+)
+		<if test="addressOld!=''">
+			AND u.address_old LIKE '%${addressOld}%'
+		</if>
+		<if test="americano!=0">
+											<![CDATA[AND u.americano <= #{americano}]]>
+		</if>
+		) ru
+		WHERE u.no = ru.no
+		<if test="withUnis!=0">
+			AND withUnis >= #{withUnis}
+		</if>
+		order by r)
+		where r between #{start} and #{end}
+	</select>
+
+
+	<select id="newList" resultType="User">
+		select
+		NO,EMAIL,PASSWORD,NAME,NICKNAME,BIRTH_DATE,GENDER,CELL,PROFILE,COVER,REGDATE,INTRO,LICENSE,CAFE_NAME
+		cafeName,ZIPCODE,ADDRESS_NEW addressNew,ADDRESS_OLD
+		addressOld,LATITUDE,LONGITUDE,OPEN,CLOSE,REST_DATE,PHONE,AMERICANO,LAST_LOGIN
+		from(SELECT *
+		FROM users
+		where license IS NOT NULL
+		ORDER BY regdate DESC)
+		WHERE rownum BETWEEN 1 AND 3
+	</select>
+
+	<select id="bestList" resultType="User">
+		SELECT
+		NO,EMAIL,PASSWORD,NAME,NICKNAME,BIRTH_DATE,GENDER,CELL,PROFILE,COVER,REGDATE,INTRO,LICENSE,CAFE_NAME
+		cafeName,ZIPCODE,ADDRESS_NEW addressNew,ADDRESS_OLD
+		addressOld,LATITUDE,LONGITUDE,OPEN,CLOSE,REST_DATE,PHONE,AMERICANO,LAST_LOGIN,cnt
+		FROM(SELECT
+		NO,EMAIL,PASSWORD,NAME,NICKNAME,BIRTH_DATE,GENDER,CELL,PROFILE,COVER,REGDATE,INTRO,LICENSE,CAFE_NAME,ZIPCODE,ADDRESS_NEW,ADDRESS_OLD,LATITUDE,LONGITUDE,OPEN,CLOSE,REST_DATE,PHONE,AMERICANO,LAST_LOGIN,cnt
+		FROM users u, (SELECT target_no,COUNT(*) cnt
+		FROM comments
+		GROUP BY target_no) c
+		WHERE license IS NOT NULL AND u.no=c.target_no
+		ORDER BY
+		cnt(+) DESC)
+		WHERE rownum between 1 and 3
+	</select>
+
+	<select id="cafeList" resultType="User">
+		select no,nickname,cafeName,nickname,addressOld,intro,profile,americano, withUnis
+		from(select u.no,u.nickname,u.cafeName,u.addressOld,u.intro,u.profile,u.americano, ru.withUnis, rownum r
+		from(SELECT NO,EMAIL,PASSWORD,NAME,NICKNAME,BIRTH_DATE,GENDER,CELL,PROFILE,COVER,REGDATE,INTRO,LICENSE,CAFE_NAME cafeName,ZIPCODE,ADDRESS_NEW,ADDRESS_OLD addressOld,LATITUDE,LONGITUDE,OPEN,CLOSE,REST_DATE,PHONE,AMERICANO,LAST_LOGIN,rownum r
+		   FROM(SELECT NO,EMAIL,PASSWORD,NAME,NICKNAME,BIRTH_DATE,GENDER,CELL,PROFILE,COVER,REGDATE,INTRO,LICENSE,CAFE_NAME,ZIPCODE,ADDRESS_NEW,ADDRESS_OLD,LATITUDE,LONGITUDE,OPEN,CLOSE,REST_DATE,PHONE,AMERICANO,LAST_LOGIN   
+		      FROM users u
+		      WHERE license IS NOT NULL
+		      ORDER BY regdate DESC)) u, 
+		             (SELECT u.no no,  NVL(withUnis,0) withUnis
+		               FROM users u, (SELECT DISTINCT n.user_no withUnis
+		                           FROM (SELECT need_no
+		                                 FROM  matchings
+		                                 WHERE status = '매칭완료' AND (TO_CHAR(end_event,'yyyymmdd') - TO_CHAR(SYSDATE,'yyyymmdd')) > 0) m, needs n
+		                                 WHERE n.no = m.need_no
+		                                 AND n.type = 'unes') m
+		                                 WHERE u.no = m.withUnis(+)
+		                                 ) ru
+		WHERE u.no = ru.no       
+		order by r)
+		where r between 1 and 12
+	</select>
+	
+	<select id="selectOneForTabs" resultType="User" parameterType="int">
+		SELECT no, nickname, profile, cover, license, cafe_name cafeName
+		FROM USERS
+		WHERE no=#{_parameter}
+	</select>
+	
+</mapper>

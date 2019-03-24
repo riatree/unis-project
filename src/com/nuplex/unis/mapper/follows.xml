@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="follows">
+	<select id="selectList" resultType="Follow" parameterType="int">
+		SELECT f.no no, f.user_no userNo, f.target_no targetNo, u.profile profile, u.cafe_name cafeName, u.nickname nickname, f.regdate regdate
+		FROM follows f, users u
+		WHERE f.target_no = u.no
+		AND f.user_no = #{no}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM follows
+		WHERE no = #{no}
+	</delete>
+	
+</mapper>

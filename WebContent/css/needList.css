@@ -1,0 +1,283 @@
+@charset "UTF-8";
+#topWrap{
+    width: 1050px;
+    height: 40px;
+    margin: auto;
+}
+#content .aux{
+	padding-top: 20px;
+}
+h2{
+    font-size: 40px;
+    float: left;
+}
+#registerBtn{
+    float: right;
+    width: 90px;
+    height: 40px;
+    display: block;
+    border-radius: 5px;
+    background-color: #68d3fa;
+    text-align: center;
+    line-height: 40px;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
+#registerBtn:hover{
+    background-color: #fff;
+}
+
+
+#filterWrap{
+    clear: both;
+    width: 1046px;
+    margin: 20px auto;
+    border: 2px solid #616161;
+}
+#filterBox{
+    text-align: justify;
+}
+.wrapper{
+    min-width: 310px;
+    margin: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+label{
+    cursor: pointer;
+}
+.input_title{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+#regionWrap input{
+    width: 348px;
+    height: 26px;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #fa7268;
+    text-indent: 10px;
+}
+#searchRegionBtn{
+    width: 50px;
+    width: 48px;!ie;
+    height: 30px;
+    padding: 0;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    background-color: #fa7268;
+    color: #fff;
+    vertical-align: top;
+}
+.icon_talent{
+    width: 35px;
+    height: 48px;
+    padding: 2px;
+    margin-left: 5px;
+    border: 3px solid #A9A9A9;
+    border-radius: 5px;
+    display: inline-block;
+    color: #616161;
+    text-align: center;
+    vertical-align: bottom;
+}
+.icon_talent.on{
+    border-color: #fa7268;
+    font-weight: bold;
+    color: #fa7268;
+}
+.icon_talent .fas{
+    font-size: 30px;
+    display: block;
+}
+#dateBox{
+    position: relative;
+    z-index: 3;
+}
+.tui-calendar th, .tui-calendar td{
+    line-height: 39px;
+}
+#timeBox{
+    margin-top: 10px;
+}
+#timeBox label{
+    display: block;
+    margin-top: 5px;
+}
+.timepicker{
+    width: 172px;
+    display: inline-block;
+}
+.tui-timepicker{
+    padding: 0;
+}
+#noiseWrap label {
+    display: block;
+    margin: 10px 0;
+}
+#costWrap label{
+    width: 150px;
+    height: 25px;
+    border-radius: 5px;
+    background-color: #A9A9A9;
+    text-align: center;
+    line-height: 25px;
+    font-size: 15px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+#costWrap .standard.on, #costWrap .method.on{
+    background-color: #fa7268;
+}
+#hourlyBox, #commissionBox{
+    clear: both;
+    margin: 10px 0;
+}
+#commissionBox{
+    display: none;
+}
+.slider{
+    width: 90%;
+    margin-left: 15px;
+}
+.ui-slider-handle{
+    border-radius: 20px;
+    outline: none;
+}
+.range_last{
+    float: right;
+}
+.range_input{
+    width: 30px;
+    margin-left: 100px;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    background: transparent;
+}
+.range_input.cost{
+    width: 80px;
+    margin-left: 50px;
+}
+#foldBox{
+    min-height: 30px;
+    overflow: hidden;
+    padding: 5px;
+    background: #616161;
+}
+#foldBox div{
+    width: 1000px;
+    min-height: 30px;
+    line-height: 30px;
+    float: left;
+    color: #fff;
+}
+.item_filter{
+    float: left;
+    margin-right: 15px;
+}
+.deleteBtn{
+    background: transparent;
+    color: #fff;
+}
+.btn_fold{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    font-size: 25px;
+    background: #fa7268;
+    border-radius: 30px;
+    text-align: center;
+    line-height: 30px;
+    float: right;
+}
+
+#listWrap{
+    width: 1050px;
+    min-height: 210px;
+    margin: 20px auto;
+    margin-bottom: 0;
+    overflow: hidden;
+}
+.card_ines{
+    display: inline-block;
+    width: 340px;
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+.item_ines:nth-child(3n) .card_ines{
+    margin-right: 0;
+}
+.card{
+    width: 340px;
+    height: 190px;
+    background-image: url("../img/somin.jpg");
+    background-size: cover;
+    background-position: center;
+}
+.box_detail,.box_info{
+    width: 330px;
+    padding: 5px;
+    color: #fff;
+    background-color: rgba(0,0,0,0.5);
+}
+.box_detail{
+    height: 115px;
+    position: relative;
+    line-height: 1.8;
+    visibility: hidden;
+    transition: .2s ease;
+}
+.box_detail i {
+    width: 25px;
+}
+.box_info{
+    height: 55px;
+    position: relative;
+    line-height: 1.5;
+}
+.location{
+	text-overflow: ellipsis;
+    word-break: break-all;
+    text-align: justify-all;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.title{
+    font-size: 18px;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    text-align: justify-all;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.profile{
+    width: 25px;
+    height: 25px;
+    border-radius: 30px;
+    background-color: #fff;
+}
+.nickname{
+    vertical-align: top;
+}
+.status{
+    padding: 0 5px;
+    float: right;
+    border: 2px solid #68d3fa;
+    border-radius: 5px;
+}
+
+#paginateWrap{
+	clear: both;
+	margin-bottom: 20px;
+}

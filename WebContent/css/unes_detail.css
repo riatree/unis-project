@@ -1,0 +1,364 @@
+@charset "UTF-8";
+		
+        #heroWrap{
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+        }
+        #heroWrap>img{
+            object-fit: cover;
+        }
+        #contents{
+            width: 100%;
+            height: auto;
+        }
+        .aux{
+            width: 1050px;
+            height: auto;
+            margin: 10px auto;
+            /* border: 2px solid #424242;*/
+        }
+       
+        /*최상단*/
+        #titleBox{
+            height: 100px;
+            line-height: 90px;
+        }
+        #topTitle{
+            font-size: 32px;
+            float: left;
+            margin-left: 10px;
+        }
+        #btnBox{
+            width: 350px;
+            height: 100px;
+            float: right;
+            text-align: center;
+        }
+        .detail_btn{
+            width: 100px;
+            height: 40px;
+            font-size: 20px;
+            color: #000;
+            background-color: transparent;
+            border: 1px solid #424242;
+            border-radius: 20px;
+            outline: none;
+        }
+        .detail_btn:hover{
+            color: #fff;
+            background-color: #fa7268;
+        }
+        .detail_btn:active{
+            color: #fff;
+            background-color: #E91E63;
+        }
+
+        /*카페내용*/
+        #cafeWrap{
+            clear: both;
+            width: 900px;
+            height: auto;
+            overflow: hidden;
+            margin: auto;
+            border-bottom: 1px solid #424242;
+        }
+        #cafeDetailBox{
+            width: 550px;
+            min-height: 300px;
+            float: left;
+        }
+        #cafeTitleBox{
+            font-size: 36px;
+        }
+        #cafeProfile{
+            border: 3px solid #424242;
+            border-radius: 46px;
+        }
+        .fa-bookmark{
+            cursor: pointer;
+        }
+        #cafeDetailList {
+            width: 530px;
+            margin: 10px 0 20px 0;
+            margin: 10px 0 20px 0;
+            color: rgb(158, 158, 158);
+            float: right;
+
+        }
+        #cafeDetailList>li {
+            margin-top: 15px;
+        }
+        #cafeDetailList li>i {
+            text-indent: -20px;
+        }
+        .cafe_conditions{
+            border: 2px solid #fa7268;
+            border-radius: 29px;
+            width: 85px;
+            height: 20px;
+            text-align: center;
+            color: #000;
+            display: inline-block;
+            line-height: 20px;
+        }
+        #cafeText{
+            line-height: 20px;
+        }
+
+        #mapBox{
+            width: 300px;
+            height: 350px;
+            float: right;
+        }
+        #mapText{
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /*UNES 조건*/
+        #unesWrap{
+            width: 900px;
+            height: 270px;
+            margin : 20px auto;
+        }
+        #unesTitle{
+            font-size: 32px;
+            height: 80px;
+            line-height: 45px;
+        }
+        .unes_condition_List{
+            width: 440px;
+            margin-top: 10px;
+            color: rgb(158, 158, 158);
+            float: right;
+        }
+        .unes_condition_List>li{
+            margin-top: 10px;
+        }
+        .unes_condition_List li>i{
+            text-indent: -20px;
+        }
+      
+      #unesConditionList>li .kakao_talk{
+      		text-decoration: none;
+      		color : rgb(158, 158, 158);
+      }
+
+        /* 공유공간 */
+        #shareSpaceWrap{
+            width: 900px;
+            height: 250px;
+            margin: auto;
+        }
+        #shareSpaceTitle{
+            font-size: 32px;
+            height: 50px;
+
+        }
+        #shareSpaceImgBix{
+            margin-top: 25px;
+            border-radius: 2px;
+        }
+        #shareSpaceImgBix li{
+            width: 300px;
+            float: left;
+
+        }
+        #shareSpaceImgBix li>img{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 아티스트 */
+        #artistsWrap{
+            width: 900px;
+            height: auto;
+            overflow : hidden;
+            margin: auto;
+        }
+
+        /* 아티스트 매칭됨 */
+        #artistsTitle{
+            width: 300px;
+            height: 50px;
+            background-color: #fa7268;
+            color: #fff;
+            border-radius: 10px;
+            font-size: 25px;
+            text-align: center;
+            line-height: 40px;
+        }
+        #artistsMatchedBox{
+            position: relative;
+            width: 900px;
+            height: 250px;
+            margin-top: 20px;
+            margin-bottom : 40px;
+            border-radius: 2px;
+        }
+        #artistsListBox{
+            position: relative;
+            width: 800px;
+            height: 250px;
+            margin: auto;
+            overflow: hidden;
+            /*     background-color: #00B8D4;*/
+        }
+        #artistsList{
+            position: absolute;
+            width: auto;
+            height: 250px;
+            /*  background-color: #9575CD;*/
+        }
+        #artistsMatchedBox>#leftBtn{
+            position: absolute;
+            top: 0px;
+        }
+        #rightBtn{
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        .artists_box{
+            width: 195px;
+            height: 248px;
+            float: left;
+            border: 1px solid #fa7268;
+            border-radius: 3px;
+            margin-left: 3px;
+        }
+        .artists_profile{
+            border-radius: 60px;
+            display: block;
+            margin:10px auto;
+        }
+        .artists_text{
+            display: block;
+            text-align: center;
+            margin: 3px auto;
+        }
+        .artists_text.event_date{
+        	font-size: 15px;
+        	width: 150px;
+        	height: 30px;
+        	margin-bottom: 3px
+        }
+        .artists_text.event_time {
+        	margin-top: 3px;
+        	font-size: 15px;
+        }
+        .artists_box_btn{
+            width: 50px;
+
+            text-align: center;
+            line-height: 250px;
+            font-size: 25px;
+        }
+        .artists_box_btn>i{
+            cursor: pointer;
+        }
+        .artists_box_btn>i:active{
+            transform: scale(.8);
+        }
+
+        /* 아티스트 매칭중 */
+        #artistsMatchingBox{
+            width: 900px;
+            height: auto;
+            border-radius: 2px;
+
+        }
+        #artistsMatchingList{
+            width: 800px;
+            min-height: 200px;
+            margin: auto;
+            font-size: 20px;
+        }
+        .artists_matching_box{
+            width: 796px;
+            min-height: 196px;
+            margin: 20px auto;
+            border: 2px solid #fa7268;
+            border-radius: 2px;
+        }
+        .artists_profileimg_box{
+            width: 140px;
+            min-height: 196px;
+            float: left;
+        }
+        .artists_profileimg{
+            border-radius: 60px;
+            margin: 30px 0 0 10px;
+        }
+        .artists_detail_box{
+            width: 560px;
+            min-height: 196px;
+            float: left;
+        }
+        .artists_detail_nickname{
+            display:block;
+            width: 200px;
+            height: 64px;
+            font-size: 20px;
+            /*background-color: #9575CD;*/
+            line-height: 60px;
+            float: left;
+        }
+        .artists_detail_date_box{
+            font-size: 12px;
+            float: right;
+            margin-top:0;
+           /* background-color: #00B8D4;*/
+        }
+        .artists_detail_ragdate{
+            display:block;
+            font-size: 12px;
+            width: 560px;
+            height: 24px;
+            text-align: right;
+            line-height: 24px;
+        }
+        .artists_detail_time{
+            width: 560px;
+            height: 40px;
+ /*           background-color: yellow;*/
+            text-align: right;
+            line-height: 40px;
+        }
+        .artists_detail_text{
+            margin-top: 20px;
+            line-height: 25px;
+        }
+        .artists_btn{
+            width: 80px;
+            height: 30px;
+            border: 1px solid #424242;
+            border-radius: 15px;
+            text-align: center;
+            display: block;
+            margin: 20px auto;
+            outline: none;
+            cursor: pointer;
+        }
+        .artists_btn:hover{
+            color: #fff;
+            background-color: #fa7268;
+        }
+        .artists_btn:active{
+            color: #fff;
+            background-color: #E91E63;
+        }
+        .artists_btn_box{
+            width: 96px;
+            min-height: 196px;
+            float: left;
+        }
+        #paginateWrap{
+            clear: both;
+           width: 300px;
+           height: 60px;
+            margin: auto;
+            text-align : center;
+        }

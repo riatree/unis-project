@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="needs">
+
+	<insert id="insert" parameterType="Need">
+		<selectKey order="BEFORE" keyProperty="no" resultType="int">
+			SELECT needs_seq.nextval
+			FROM dual
+		</selectKey>
+			INSERT INTO NEEDS(NO,TYPE,USER_NO,TITLE,TALENT_NO,START_DATE,END_DATE,NOISE,FARE,FARE_DIR,FARE_TYPE,CHAIRS,AREA,KAKAO,STATUS,REGDATE,REGION)
+			VALUES(#{no},#{type},#{userNo},#{title},#{talentNo},#{startDate},#{endDate},#{noise},#{fare},#{fareDir},#{fareType},#{chairs},#{area},#{kakao},'모집중',systimestamp,#{region})
+	</insert>
+
+	<select id="selectList" parameterType="PageVO" resultType="Need">
+		SELECT no,TYPE,nickname,profile,TITLE,talentNo,startDate,endDate,NOISE,FARE,fareDir,fairType,CHAIRS,AREA,KAKAO,STATUS,REGDATE,REGION
+		FROM (SELECT no,TYPE,nickname,profile,TITLE,talentNo,startDate,endDate,NOISE,FARE,fareDir,fairType,CHAIRS,AREA,KAKAO,STATUS,REGDATE,REGION,rownum r
+	  		  FROM(SELECT n.NO,TYPE,u.nickname,u.profile,TITLE,TALENT_NO talentNo,START_DATE startDate,END_DATE endDate,NOISE,FARE,FARE_DIR fareDir,FARE_TYPE fairType,CHAIRS,AREA,KAKAO,STATUS,n.REGDATE,REGION
+		   	  FROM needs n, users u
+		   	  WHERE type=#{type} AND n.user_no=u.no
+		   	  <if test="region!=''">
+		   	  AND region LIKE '%${region}%'
+		   	  </if>
+		      <if test="talentNo!=''">
+		   	  AND talent_no IN (SELECT no
+							 	FROM talents
+							 	WHERE name IN (${talentNo}))
+		   	   </if>
+		   	   <if test="startDate!=null and endDate!=null">
+		   		AND start_date > #{startDate}
+		   		AND #{endDate} > end_date
+		   	   </if>
+		   		<if test="noise!=0">
+		   		AND noise=#{noise}
+		   		</if>
+		   		<if test="fareType!='' and fare!=0 and fareDir!=''">
+		   		AND fare_type=#{fareType} AND fare=#{fare} AND fare_dir=#{fareDir}
+		   		</if>
+		   		<if test="area!=0">
+		   		AND area>#{area}
+		   		</if>
+		   		ORDER BY n.regdate DESC))
+				WHERE r BETWEEN #{start} AND #{end}
+	</select>
+
+<select id="selectTotal" parameterType="PageVO" resultType="int">
+SELECT COUNT(*)
+FROM needs
+WHERE type=#{type}
+	   <if test="region!=''">
+	   AND region LIKE '%${region}%'
+	   </if>
+	   <if test="talentNo!=''">
+	   AND talent_no IN (SELECT no
+						 FROM talents
+						 WHERE name IN (${talentNo}))
+	   </if>
+	   <if test="startDate!=null and endDate!=null">
+	   AND start_date > #{startDate}
+	   AND #{endDate} > end_date
+	   </if>
+	   <if test="noise!=0">
+	   AND noise=#{noise}
+	   </if>
+	   <if test="fareType!=null and fare!=0 and fareDir!=null">
+	   AND fare_type=#{fareType} AND fare=#{fare} AND fare_dir=#{fareDir}
+       </if>
+       <if test="area!=0">
+	   AND area>#{area}
+	   </if>
+</select>
+
+<select id="selectUnesOne" resultType="Need" parameterType="int">
+SELECT n.no no,n.type type, n.title title, t.name talentName, n.talent_no talentNo, n.start_date startDate, n.end_date endDate, n.noise noise, n.fare fare, n.fare_dir fareDir, n.fare_type fareType, n.chairs chairs, n.area area, n.kakao kakao, n.status status, n.regdate regdate, 
+  		   u.no userNo, u.nickname nickname,u.americano americano, u.cover cover, u.profile profile, u.intro intro, u.cafe_name cafeName, u.address_new addressNew, u.address_old addressOld, u.latitude latitude, u.longitude longitude, u.open open, u.close close, u.rest_date restDate, u.phone phone
+FROM users u, needs n, talents t
+WHERE u.no = n.user_no
+AND t.no = n.talent_no
+AND n.type = 'unes'
+AND n.no = #{no}
+</select>
+
+<select id="selectInesOne" resultType="Need" parameterType="int">
+		SELECT n.no no,n.type type, n.title title, t.name talentName, n.talent_no talentNo, n.start_date startDate, n.end_date endDate, n.noise noise, n.fare fare, n.fare_dir fareDir, n.fare_type fareType, n.chairs chairs, n.area area, n.kakao kakao, n.status status, n.regdate regdate, 
+	   		   u.no userNo, u.nickname nickname,u.americano americano, u.cover cover, u.profile profile, u.intro intro, u.cafe_name cafeName, u.address_new addressNew, u.address_old addressOld, u.latitude latitude, u.longitude longitude, u.open open, u.close close, u.rest_date restDate, u.phone phone
+		FROM users u, needs n, talents t
+		WHERE u.no = n.user_no
+		AND t.no = n.talent_no
+		AND n.type = 'ines'
+		AND n.no = #{no}
+	</select>
+
+<select id="selectListCount" parameterType="int" resultType="int">
+SELECT count(*) count
+FROM matchings
+WHERE status = '매칭완료'
+AND need_no = #{no}
+</select>
+	
+	<select id="selectNeedList" parameterType="int" resultType="Need">
+		SELECT n.no no, n.type type, n.title title, n.talent_no talentNo,u.cafe_name cafeName, n.start_date startDate, n.end_date endDate, n.noise noise, u.nickname nickname, u.profile profile,u.address_new addressNew, n.fare fare, n.fare_dir fareDir, n.fare_type fareType, n.chairs chairs, n.area area, n.kakao kakao, n.status, n.regdate regdate, n.region region
+		FROM users u, needs n
+		WHERE u.no = n.user_no
+		AND u.no = #{no}
+	</select>
+
+</mapper>

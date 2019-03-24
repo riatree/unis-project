@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- null입력 허용 -->
+	<settings>
+        <setting name="jdbcTypeForNull" value="NULL" />
+    </settings>
+	
+	<typeAliases>
+		<typeAlias alias="CafeCondition" type="com.nuplex.unis.vo.CafeCondition"/>
+		<typeAlias alias="Comment" type="com.nuplex.unis.vo.Comment"/>
+		<typeAlias alias="Follow" type="com.nuplex.unis.vo.Follow"/>
+		<typeAlias alias="Image" type="com.nuplex.unis.vo.Image"/>
+		<typeAlias alias="ImageLink" type="com.nuplex.unis.vo.ImageLink"/>
+		<typeAlias alias="Like" type="com.nuplex.unis.vo.Like"/>
+		<typeAlias alias="Matching" type="com.nuplex.unis.vo.Matching"/>
+		<typeAlias alias="Message" type="com.nuplex.unis.vo.Message"/>
+		<typeAlias alias="Need" type="com.nuplex.unis.vo.Need"/>
+		<typeAlias alias="Support" type="com.nuplex.unis.vo.Support"/>
+		<typeAlias alias="Talent" type="com.nuplex.unis.vo.Talent"/>
+		<typeAlias alias="User" type="com.nuplex.unis.vo.User"/>
+		<typeAlias alias="UserTalent" type="com.nuplex.unis.vo.UserTalent"/>
+		<typeAlias alias="PageVO" type="com.nuplex.unis.vo.PageVO"/>
+		<typeAlias alias="ScrollVO" type="com.nuplex.unis.vo.ScrollVO"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="com/nuplex/unis/mapper/cafeConditions.xml"/>
+		<mapper resource="com/nuplex/unis/mapper/comments.xml"/>
+		<mapper resource="com/nuplex/unis/mapper/follows.xml"/>
+		<mapper resource="com/nuplex/unis/mapper/images.xml"/>
+		<mapper resource="com/nuplex/unis/mapper/imagesLink.xml"/>
+		<mapper resource="com/nuplex/unis/mapper/likes.xml"/>
+		<mapper resource="com/nuplex/unis/mapper/matchings.xml"/>
+		<mapper resource="com/nuplex/unis/mapper/messages.xml"/>
+		<mapper resource="com/nuplex/unis/mapper/needs.xml"/>
+		<mapper resource="com/nuplex/unis/mapper/supports.xml"/>
+		<mapper resource="com/nuplex/unis/mapper/talents.xml"/>
+		<mapper resource="com/nuplex/unis/mapper/users.xml"/>
+		<mapper resource="com/nuplex/unis/mapper/userTanlents.xml"/>
+	</mappers>	
+</configuration>

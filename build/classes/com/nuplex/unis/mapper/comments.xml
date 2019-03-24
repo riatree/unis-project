@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="comments">
+
+	<select id="selectList" parameterType="ScrollVO" resultType="Comment">
+		SELECT no,userNo,nickname,profile,targetNo,status,seq,content,regdate,totalCount,r
+		FROM (SELECT no,userNo,nickname,profile,targetNo,seq,content,status,regdate,totalCount,rownum r
+			  FROM (SELECT c.no no,user_no userNo,u.nickname,profile,target_no targetNo,seq,content,status,c.regdate regdate, totalCount
+					FROM COMMENTS c, users u, (SELECT comment_no, count(*) totalCount
+											   FROM likes
+											   GROUP BY comment_no) l
+					WHERE target_no = #{userNo}
+					AND status NOT LIKE 'deleted'
+					AND c.user_no = u.no AND c.no = l.comment_no(+)
+					ORDER BY seq DESC, to_number(status) ASC))
+		WHERE r BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="selectTotal" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM COMMENTS
+		WHERE target_no = #{_parameter} AND status NOT LIKE 'deleted'
+	</select>
+	
+	<insert id="insertOriginal" parameterType="Comment">
+		<selectKey order="BEFORE" keyProperty="no" resultType="int">
+			SELECT COMMENTS_SEQ.nextval
+			FROM dual
+		</selectKey>
+		INSERT INTO COMMENTS
+		VALUES(#{no},#{userNo},#{targetNo},
+			(SELECT COUNT(*)+1
+			 FROM COMMENTS
+			 WHERE target_no=#{targetNo}),#{content},(SELECT COUNT(*)+1
+													  FROM COMMENTS
+													  WHERE target_no=#{targetNo}),SYSTIMESTAMP)
+	</insert>
+	
+	<insert id="insertRecomment" parameterType="Comment">
+		<selectKey order="BEFORE" keyProperty="no" resultType="int">
+			SELECT COMMENTS_SEQ.nextval
+			FROM dual
+		</selectKey>
+		INSERT INTO COMMENTS
+		VALUES(#{no},#{userNo},#{targetNo},#{seq},#{content},(SELECT COUNT(*)+1
+											  				  FROM COMMENTS
+													  		  WHERE target_no=#{targetNo}),SYSTIMESTAMP)
+	</insert>
+	
+	<select id="selectOne" parameterType="int" resultType="Comment">
+		SELECT c.no,user_no userNo,target_no targetNo,seq,content,status,c.regdate,profile,nickname
+		FROM comments c, users u
+		WHERE c.no = #{_parameter}
+		AND c.user_no = u.no
+	</select>
+	
+	<select id="selectProfileCommentList" parameterType="PageVO" resultType="Comment">
+		SELECT no, userNo, targetNo, seq,content, status, regdate, noUser, userProfile,userNickname, r
+      FROM(SELECT no, userNo, targetNo, seq,content, status, regdate, noUser, userProfile,userNickname, rowNum r   
+         FROM(SELECT c.no, c.user_no userNo, c.target_no targetNo, c.seq,c.content content, c.status, c.regdate,
+            u.no noUser, u.profile userProfile,u.nickname userNickname         
+            FROM comments c, users u
+            WHERE c.user_no = u.no
+            AND c.status = 'normal'
+            AND c.user_no = #{userNo}
+            ORDER BY no DESC))
+      WHERE r BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="selectProfileCommentTotal" parameterType="int" resultType="int">
+		SELECT count(*)
+		FROM comments
+		WHERE user_no = #{no}
+		AND status = 'normal'
+	</select>
+	
+	<update id="update" parameterType="int">
+		UPDATE comments
+		SET status = 'delete'
+		WHERE no = #{no}
+	</update>
+	
+</mapper>
